@@ -37,7 +37,7 @@ e digite o seguinte comando.
 npm init
 ```
 
-Após isso deverá ser iniciado um donwload, e haverá algumas perguntas como nome, descrição e etc sobre o projeto, você pode dar enter em todas as perguntas, após isso deve ser gerado uma pasta chamada `node_modules` onde haverá alguns modulos e um arquivo chamado package.json.
+Após isso deverá ser iniciado um donwload, e haverá algumas perguntas como nome, descrição e etc sobre o projeto, você pode dar enter em todas as perguntas, após isso deve ser gerado uma pasta chamada `node_modules` onde haverá alguns modulos haverá um arquivo chamado package.json e um package-lock.json .
 
 após isso crie um arquivo chamado main.js, que será teu arquivo principal, onde estará a base para o seu site.
 
@@ -61,7 +61,60 @@ npm install --save mysql2
 ```
 
 Apenas confira que seu package.json está assim:
-![Ambiente](Ambiente.png)
+![Ambiente](img/Ambiente.png)
 
 
 Pronto, seu ambiente está pronto e agora iremos começar nosso programa
+
+Abra seu arquivo main.js e insira isto:
+
+```
+const express = require("express");
+const app = express();
+```
+
+Na "const express = require("express");", você irá requerer o pacote express que você instalou.
+E "const app = express();" você usará o express.
+Defina também com "app.use(express.json());" para que quando você for registrar dado ele registre no formato JSON.
+Defina o metodo get usando o get, e defina a porta onde rodará o programa:
+```
+app.get("/", async (req, res) => {
+    res.send("Metodo Get Funcionando Com Sucesso")
+})
+
+app.listen(8080, () => {
+    console.log("Programa Funcionando Com Sucesso")
+})
+```
+Agora no terminal que você abriu anteriormente digite "nodemon app.js".
+E depois acesse no seu navegador o seguinte endereço: "localhost://8080".
+OBS: Você pode mudar a porta de 8080 para a que desejar.
+Deverá abrir corretamente exibindo o que foi definido no console.log.
+
+
+Agora você deve criar o banco de dados mysql, é muito simples tanto pelo workbench quanto pelo cmd, basta pesquisar.
+OBS: É importante ter instalado o MySql Server, já que ele realiza a conexão, caso não seja instalado não funcionará.
+Recomendo que crie o banco com o nome "resgistroscomnode" e também defina para que o banco use as formatações de "UTF-8", para que acentos e caracteres especiais sejam possíveis em registros.
+Fique tranquilo, ainda não será necessário criar uma tabela.
+
+Agora iremos nos conectar ao banco, crie uma pasta chamada models, e dentro da pasta crie um arquivo chamado "db.js", e digite esta estrutura.
+
+```
+//Aqui você requere o sequelize.
+const Sequelize  = require("sequelize")
+
+//Aqui você efetua a conexão em si, "resgistroscomnode" é o nome do banco que foi criado, root é o usuário padrão do MySql, e o terceiro campo será a senha que você definiu ao instalar o MySqlServer, em seguida você define que usará o localhost e o mysql
+const conexao = new Sequelize("resgistroscomnode", "root", "********", {
+    host: "localhost",
+    dialect: "mysql"
+});
+//Aqui você cria uma autenticação para ver se a conexão foi efetuada, caso "Conexão Efetuada Com Sucesso" seja exibida no terminal quer dizer a conexão deu problema.
+conexao.authenticate()
+.then(function(){
+console.log("Conexão Efetuada Com Sucesso")
+}).catch(function(){
+    console.log("ERRO: Conexão Não Efetuada Com Sucesso")
+})
+//E aqui você exporta conexão.
+module.exports = conexao
+```

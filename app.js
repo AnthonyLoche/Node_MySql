@@ -5,7 +5,7 @@ const User = require("./models/users")
 app.use(express.json());
 
 app.get("/", async (req, res) => {
-    res.send("Pagina Inicial")
+    res.send("Metodo Get Funcionando Com Sucesso")
 })
 
 app.post("/cadastrar", async (req, res) => {
