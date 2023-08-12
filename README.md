@@ -87,12 +87,12 @@ app.listen(8080, () => {
 })
 ```
 Agora no terminal que você abriu anteriormente digite "nodemon main.js".
-E depois acesse no seu navegador o seguinte endereço: "localhost://8080".
+E depois acesse no seu navegador o seguinte endereço: "localhost://8080".\
 OBS: Você pode mudar a porta de 8080 para a que desejar.
 Deverá abrir corretamente exibindo o que foi definido no console.log.
 
 
-Agora você deve criar o banco de dados mysql, é muito simples tanto pelo workbench quanto pelo cmd, basta pesquisar.
+Agora você deve criar o banco de dados mysql, é muito simples tanto pelo workbench quanto pelo cmd, basta pesquisar.\
 OBS: É importante ter instalado o MySql Server, já que ele realiza a conexão, caso não seja instalado não funcionará.
 Recomendo que crie o banco com o nome "resgistroscomnode" e também defina para que o banco use as formatações de "UTF-8", para que acentos e caracteres especiais sejam possíveis em registros.
 Fique tranquilo, ainda não será necessário criar uma tabela.
