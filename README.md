@@ -15,7 +15,7 @@ Isso gerará um arquivo .exe, e basta executa-lo
 
 Para isso também é necessario instalar o Node.Js.
 Que pode ser instalado por aqui\
-[Link para baixar o Visual Studio Code](https://nodejs.org/pt-br/download):
+[Link para baixar o Node.Js](https://nodejs.org/pt-br/download):
 Isso gerará um arquivo .exe, e basta executa-lo
 
 Como usará o MySql como database precisará instalar o mesmo, você pode usar tanto o workbench quanto o cmd do MySql.\
