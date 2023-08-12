@@ -1,7 +1,7 @@
 # NodeMySql
 
 
-_*Esse conteudo foi produzido com base no video[Como conectar Node.js com MySQL e cadastrar no banco de dados](https://www.youtube.com/watch?v=_OeuPAb9bhU)_
+_*Esse conteudo foi produzido com base no video [Como conectar Node.js com MySQL e cadastrar no banco de dados](https://www.youtube.com/watch?v=_OeuPAb9bhU)_
 
 Esse tutorial foi feito por um iniciante em desenvolvimento, inclusive em database e node.js.
 Porém espero que sirva para um começo.
@@ -9,17 +9,17 @@ A principal função seria de como inserir dados em uma database em MySql.
 
 Primeiro eu te mostrarei como preparar totalmente todo o ambiente.
 
-Para mexer com todos os códigos eu utilizei o Visual Studio Code, e recomendo que se estiver seguindo o tutorial utilize o mesmo editor.
-[Link para baixar o Visual Studio Code](https://code.visualstudio.com/download).
+Para mexer com todos os códigos eu utilizei o Visual Studio Code, e recomendo que se estiver seguindo o tutorial utilize o mesmo editor.\
+[Link para baixar o Visual Studio Code](https://code.visualstudio.com/download):
 Isso gerará um arquivo .exe, e basta executa-lo
 
 Para isso também é necessario instalar o Node.Js.
-Que pode ser instalado por aqui
-[Link para baixar o Visual Studio Code](https://nodejs.org/pt-br/download).
+Que pode ser instalado por aqui\
+[Link para baixar o Visual Studio Code](https://nodejs.org/pt-br/download):
 Isso gerará um arquivo .exe, e basta executa-lo
 
-Como usará o MySql como database precisará instalar o mesmo, você pode usar tanto o workbench quanto o cmd do MySql.
-[Link para baixar o MySql](https://dev.mysql.com/downloads/installer/).
+Como usará o MySql como database precisará instalar o mesmo, você pode usar tanto o workbench quanto o cmd do MySql.\
+[Link para baixar o MySql](https://dev.mysql.com/downloads/installer/):
 Neste site terá duas opções, escolha a que tem maior tamanho de armazenamento, no caso a segunda opção.
 Após isso você executa o arquivo .exe que vc baixou e será instalado o "MySql Installer - Commuinity", um "gerenciador", onde você pode instalar o workbench e também o mysql server, é importante definir uma senha ao instalar o mysql server, e caso queira manipular o database por cmd terá de instalar o mysql shell também.
 
@@ -87,12 +87,12 @@ app.listen(8080, () => {
 })
 ```
 Agora no terminal que você abriu anteriormente digite "nodemon main.js".
-E depois acesse no seu navegador o seguinte endereço: "localhost://8080".
+E depois acesse no seu navegador o seguinte endereço: "localhost://8080".\
 OBS: Você pode mudar a porta de 8080 para a que desejar.
 Deverá abrir corretamente exibindo o que foi definido no console.log.
 
 
-Agora você deve criar o banco de dados mysql, é muito simples tanto pelo workbench quanto pelo cmd, basta pesquisar.
+Agora você deve criar o banco de dados mysql, é muito simples tanto pelo workbench quanto pelo cmd, basta pesquisar.\
 OBS: É importante ter instalado o MySql Server, já que ele realiza a conexão, caso não seja instalado não funcionará.
 Recomendo que crie o banco com o nome "resgistroscomnode" e também defina para que o banco use as formatações de "UTF-8", para que acentos e caracteres especiais sejam possíveis em registros.
 Fique tranquilo, ainda não será necessário criar uma tabela.
