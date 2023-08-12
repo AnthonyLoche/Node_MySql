@@ -86,7 +86,7 @@ app.listen(8080, () => {
     console.log("Programa Funcionando Com Sucesso")
 })
 ```
-Agora no terminal que você abriu anteriormente digite "nodemon app.js".
+Agora no terminal que você abriu anteriormente digite "nodemon main.js".
 E depois acesse no seu navegador o seguinte endereço: "localhost://8080".
 OBS: Você pode mudar a porta de 8080 para a que desejar.
 Deverá abrir corretamente exibindo o que foi definido no console.log.
@@ -101,20 +101,113 @@ Agora iremos nos conectar ao banco, crie uma pasta chamada models, e dentro da p
 
 ```
 //Aqui você requere o sequelize.
+
 const Sequelize  = require("sequelize")
 
 //Aqui você efetua a conexão em si, "resgistroscomnode" é o nome do banco que foi criado, root é o usuário padrão do MySql, e o terceiro campo será a senha que você definiu ao instalar o MySqlServer, em seguida você define que usará o localhost e o mysql
+
 const conexao = new Sequelize("resgistroscomnode", "root", "********", {
     host: "localhost",
     dialect: "mysql"
 });
+
 //Aqui você cria uma autenticação para ver se a conexão foi efetuada, caso "Conexão Efetuada Com Sucesso" seja exibida no terminal quer dizer a conexão deu problema.
+
 conexao.authenticate()
 .then(function(){
 console.log("Conexão Efetuada Com Sucesso")
 }).catch(function(){
     console.log("ERRO: Conexão Não Efetuada Com Sucesso")
 })
+
 //E aqui você exporta conexão.
+
 module.exports = conexao
 ```
+
+Pronto, agora estamos conectados ao banco e aprenderemos a inserir dados neste banco por fora dele.
+
+Recomendo que você use a extensão "Rapid API Client" com ela conseguimos fazer Get, Post, Update e etc por dentro do VsCode, mas você pode optar por usar outro programa para isso como o "PostMan" ou "Insomnia".
+
+Agora abra a pasta models e crie um novo arquivo chamado "users.js", que será onde você criará a tabela do seu banco, o codigó deste arquivo é assim:
+
+```
+Aqui você exporta o "Sequelize" e o seu arquivo "db.js".
+
+const Sequelize = require("sequelize")
+const db = require("./db");
+
+Após isso você definirá campos e nome da tabela a ser inserida no seu banco,
+"users" nó codigo será o nome da tabela, e pode ser mudada.
+Você definirá campos como nome e email, o id é gerado automaticamente pelo MySql, porém é bom definir para que ele seja do tipo número inteiro, será autoincrementado e não pode ser nulo.
+Nome e email são strings não nulas, você pode inserir varios outros campos como genero, profissao, idade, data de nascimento e até senha, porém caso queira fazer um sistema de login a interação com a senha deverá ser mais detalhada e deve envolver verificações a mais.
+
+const User = db.define("users", {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
+    },
+    name:{
+        type: Sequelize.STRING ,
+        allowNull: false
+    },
+    email:{
+        type: Sequelize.STRING ,
+        allowNull: false
+    }
+})
+
+
+User.sync()
+
+//Aqui você exporta a const User
+
+module.exports = User
+```
+
+Depois disso a tabela já deve estar criada, caso você tenha parado o "nodemon main.js" execute o mesmo comando novamente para darmos continuidade.
+
+Volte ao seu main.js e insira a sequinte const para pegar essa forma de registrar para usarmos no POST.
+
+```
+//Const que requere o metodo de usuário.
+const User = require("./models/users")
+```
+
+E adicione este metodo ao seu main.js
+
+```
+//Definimos o metodo cadastrar, o que resultará que para acessa-lo seja necessário digitar "localhost://8080/cadastrar"
+
+app.post("/cadastrar", async (req, res) => {
+    console.log(req.body)
+
+//await significa esperar, então esperaremos User ser criado e verificaremos se o usuário foi cadastrado ou não.
+
+    await User.create(req.body)
+        .then(() => {
+            return res.json({
+                erro: false,
+                mensagem: "Foi cadastrado com sucesso"
+            })
+        }).catch(() => {
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Não foi cadastrado com sucesso"
+            })
+        })
+})
+```
+
+Chegamos a parte final, nos registrarmos no banco.
+Abra a extensão "Rapid API Client".
+Defina o metodo como post e deixe como está na imagem abaixo.
+![Metodo Post](img/Post.png)
+Se preferir coloque seu nome e seu email, e aperte em send, se a resposta for como na imagem parabéns até aqui deu certo, agora abra sua forma de ver o MySql e seus databases, depois va no banco definido, na tabela de um refresh, se o dado inserido estiver lá, levante e saia pulando, "pelo menos foi o que eu fiz"
+.
+
+Este tutorial é muito básico, pois foi feito por um estudadante do 1º ano do Ensino Médio e que está no meio do primeiro ano fazendo um curso técnico de informática para internet pelo [Instituto Federal Catarinense Campus Araquari](https://araquari.ifc.edu.br/).
+É possível que esse tutorial seja atualizado, mostrando como fazer o método GET, UPDATE, DELETE, fazer verificações, login, registro com inputs e etc, digamos que esta seja a versão 1.0, espera a 2.0, 3.0, 39.9.1 e por assim vai.
+Obrigado por chegar até aqui.
