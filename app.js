@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 const User = require("./models/users")
+//  
 
 app.use(express.json());
 
 app.get("/", async (req, res) => {
-    res.send("Metodo Get Funcionando Com Sucesso")
+    const returno = await User.findAll();
+    res.send(returno)
 })
 
 app.post("/cadastrar", async (req, res) => {
@@ -23,11 +25,8 @@ app.post("/cadastrar", async (req, res) => {
                 mensagem: "Não foi cadastrado com sucesso"
             })
         })
-
-
-
 })
 
-app.listen(8080, () => {
+app.listen(8090, () => {
     console.log("Ta dando certo mn")
 })

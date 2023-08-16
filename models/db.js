@@ -1,6 +1,6 @@
 const Sequelize  = require("sequelize")
 
-const conexao = new Sequelize("resgistroscomnode", "root", "*******", {
+const conexao = new Sequelize("resgistroscomnode", "aluno", "aluno", {
     host: "localhost",
     dialect: "mysql"
 });
